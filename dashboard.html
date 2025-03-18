@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success Photo - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+         window.SUPABASE_URL = 'https://yxthfiqxrvymcdykrjap.supabase.co';
+    window.SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl4dGhmaXF4cnZ5bWNkeWtyamFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIzMzM3ODksImV4cCI6MjA1NzkwOTc4OX0.m-UJrk3KGZaTk9bmPSn_0R3VTHr7HtRfSjo08S0JMxk';
+
+    </script>
+</head>
+<body>
+<script type="module">
+    import { supabase, signOut } from './authentication.js';
+
+        // Check if the user is authenticated
+        async function checkAuth() {
+            const { data, error } = await supabase.auth.getSession();
+            if (error) {
+                alert('Authentication error: ' + error.message);
+                window.location.href = 'login.html';
+            } else if (!data.session) {
+                alert('You are not logged in.');
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Sign out function
+        document.getElementById('sign-out').addEventListener('click', async () => {
+            try {
+                await signOut();
+                alert('Sign out successful!');
+                window.location.href = 'login.html';
+            } catch (error) {
+                alert('Sign out failed: ' + error.message);
+            }
+        });
+
+        // Check authentication on page load
+        window.addEventListener('load', checkAuth);
+    </script>
+    <nav>
+        <div class="navbar">
+<div class="logo">
+    <h2>Success Photo</h2>
+</div>
+<div class="nav-buttons">
+    <button id="sign-out" class="nav-button">Logout</button>
+</div>
+        </div>
+    </nav>
+    <header>
+        <h1>Success Photo</h1>
+    </header>
+    <main>
+        <img src="success.jpg" alt="Success Photo" class="success-photo">
+    </main>
+    <footer>
+        <p>&copy; 2025 Success Photo</p>
+    </footer>
+</body>
+</html>
