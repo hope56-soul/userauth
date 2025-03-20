@@ -7,6 +7,7 @@ const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Authentication functions
 const signUp = async (email, password) => {
+  console.log('Redirect URL:', 'https://hope56-soul.github.io/userauth/'); // Debugging
   const { user, error } = await supabase.auth.signUp({
     email,
     password,
